@@ -49,7 +49,7 @@ class PaymentController extends Controller
 
         try {
             $mpesa = new Mpesa();
-            $response = $mpesa->STKPush(
+            $response = $mpesa->expressPayment(
                 $phone,
                 $amount,
                 $reference,

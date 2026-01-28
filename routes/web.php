@@ -18,12 +18,19 @@ Route::get('dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// Public Routes
+Route::get('tariffs', [\App\Http\Controllers\PublicController::class, 'tariffs'])->name('public.tariffs');
+
 // Admin Routes (Protected)
 Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     Route::resource('tariffs', TariffController::class);
     Route::get('vouchers', [VoucherController::class, 'index'])->name('vouchers.index');
     Route::post('vouchers/generate', [VoucherController::class, 'generate'])->name('vouchers.generate');
     Route::get('vouchers/{voucher}', [VoucherController::class, 'show'])->name('vouchers.show');
+
+    // Reports
+    Route::get('reports/payments', [\App\Http\Controllers\Admin\ReportController::class, 'payments'])->name('reports.payments');
+    Route::get('reports/sessions', [\App\Http\Controllers\Admin\ReportController::class, 'sessions'])->name('reports.sessions');
 });
 
 // Public Payment Routes

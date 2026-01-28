@@ -38,6 +38,7 @@ class VoucherController extends Controller
 
         return Inertia::render('Admin/Vouchers/Index', [
             'vouchers' => $vouchers,
+            'tariffs' => Tariff::select('id', 'name')->get(),
             'filters' => $request->only(['status', 'search']),
         ]);
     }
