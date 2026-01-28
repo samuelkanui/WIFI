@@ -39,7 +39,7 @@ Route::post('payment/mpesa/initiate', [PaymentController::class, 'initiate'])->n
 Route::get('payment/mpesa/status/{checkoutId}', [PaymentController::class, 'status'])->name('payment.status');
 
 // M-Pesa Callback (No CSRF protection needed)
-Route::post('mpesa/callback', [PaymentController::class, 'callback'])->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
+Route::post('mpesa/callback', [PaymentController::class, 'callback']);
 
 // Hotspot Routes
 Route::get('hotspot/login', [AuthController::class, 'showLogin'])->name('hotspot.login');
